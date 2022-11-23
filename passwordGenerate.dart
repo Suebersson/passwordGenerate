@@ -1,3 +1,13 @@
+
+import 'dart:math';
+
+void main() {
+  
+  print(passwordGenerate());
+  //print(passwordGenerate(size: 20, passwordType: PasswordType.numbersLetters));
+
+}
+
 /// Gerador de caracteres aleatórios
 String passwordGenerate({
   int size = 6, 
@@ -7,31 +17,31 @@ String passwordGenerate({
   //Code ==> https://theasciicode.com.ar/
   final List<int> skipCharCode = const 
     [34, 39, 40, 41, 44, 46, 47, 58, 59, 60, 61, 62, 91, 92, 93, 94, 96, 123];
-  final Random _random = Random.secure();
+  final Random random = Random.secure();
   int charCode;
 
   switch (passwordType) {
     case PasswordType.onlyNumbers:
       return List<String>.generate(
         size, 
-        (i) => String.fromCharCode(_random.nextInt(10) + 48), // charCode >= 48 & 57 <=
+        (i) => String.fromCharCode(random.nextInt(10) + 48), // charCode >= 48 & 57 <=
       ).join('');
     case PasswordType.onlyCapitalLetters:
       return List<String>.generate(
         size, 
-        (i) => String.fromCharCode(_random.nextInt(26) + 65),// charCode >= 65 & 90 <=
+        (i) => String.fromCharCode(random.nextInt(26) + 65),// charCode >= 65 & 90 <=
       ).join('');
     case PasswordType.onlyLowerCaseLetters:
       return List<String>.generate(
         size, 
-        (i) => String.fromCharCode(_random.nextInt(26) + 97),// charCode >= 97 & 122 <=
+        (i) => String.fromCharCode(random.nextInt(26) + 97),// charCode >= 97 & 122 <=
       ).join('');
     case PasswordType.upperLowerCaseLetters: // Characters: CapitalLetters + LowerCaseLetters 
       return List<String>.generate(
         size, 
         (i) {
           do {
-            charCode = _random.nextInt(58) + 65; // charCode >= 65 & 122 <=
+            charCode = random.nextInt(58) + 65; // charCode >= 65 & 122 <=
           } while (
             //transformar as condições em uma única condição
             !<bool>[
@@ -47,7 +57,7 @@ String passwordGenerate({
         size, 
         (i) {
           do {
-            charCode = _random.nextInt(75) + 48; // charCode >= 48 & 122 <=
+            charCode = random.nextInt(75) + 48; // charCode >= 48 & 122 <=
           } while (
             //transformar as condições em uma única condição
             !<bool>[
@@ -64,7 +74,7 @@ String passwordGenerate({
         size, 
         (i) {
           do {
-            charCode = _random.nextInt(90) + 33; // charCode >= 33 & 122 <=
+            charCode = random.nextInt(90) + 33; // charCode >= 33 & 122 <=
           } while (skipCharCode.contains(charCode));
           return String.fromCharCode(charCode);
         },
